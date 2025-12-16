@@ -7,270 +7,268 @@
 
 <style>
 :root{
---bg1:#0b1020;
---bg2:#2a0f3b;
---bg3:#0f3b2e;
---card:#0f1326cc;
---ink:#f7f2e8;
---muted:#d8cfbf;
---gold:#d8b36a;
---line:#ffffff22;
+  --bg1:#0b1020;
+  --bg2:#2a0f3b;
+  --bg3:#0f3b2e;
+  --card:#0f1326cc;
+  --ink:#f7f2e8;
+  --muted:#d8cfbf;
+  --gold:#d8b36a;
+  --line:#ffffff22;
 }
 *{box-sizing:border-box}
-html,body{height:100%}
 body{
-margin:0;
-min-height:100svh;
-font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-color:var(--ink);
-overflow:hidden; /* no scrolling */
-background:
-radial-gradient(1000px 500px at 20% 10%, #6a2cff55, transparent 60%),
-radial-gradient(900px 500px at 85% 30%, #00ffd533, transparent 55%),
-radial-gradient(900px 500px at 40% 90%, #ffcc0033, transparent 55%),
-linear-gradient(120deg, var(--bg1), var(--bg2), var(--bg3));
-background-size:140% 140%;
-animation:bgMove 12s ease-in-out infinite alternate;
+  margin:0;
+  min-height:100svh;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color:var(--ink);
+  overflow-x:hidden;
+  background:
+    radial-gradient(1000px 500px at 20% 10%, #6a2cff55, transparent 60%),
+    radial-gradient(900px 500px at 85% 30%, #00ffd533, transparent 55%),
+    radial-gradient(900px 500px at 40% 90%, #ffcc0033, transparent 55%),
+    linear-gradient(120deg, var(--bg1), var(--bg2), var(--bg3));
+  background-size:140% 140%;
+  animation:bgMove 12s ease-in-out infinite alternate;
 }
 @keyframes bgMove{ from{background-position:0% 30%} to{background-position:100% 70%} }
 
+/* Fit/center on one screen */
 .wrap{
-position:relative;
-z-index:2;
-height:100svh;
-display:flex;
-align-items:center;
-justify-content:center;
-padding: 10px; /* minimal padding so everything can fit */
+  position:relative;
+  z-index:2;
+  min-height:100svh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding: clamp(10px, 2vh, 28px) 12px;
 }
-
 .card{
-width:min(920px, 100%);
-border:1px solid var(--line);
-border-radius:22px;
-overflow:hidden;
-background: linear-gradient(180deg, #0f1326cc, #0f1326aa);
-box-shadow:0 30px 90px rgba(0,0,0,.45);
-backdrop-filter: blur(10px);
-transform-origin: center top; /* scale from top-center */
-opacity:0;
-animation: cardIn .9s ease-out forwards;
+  width:min(920px, 100%);
+  border:1px solid var(--line);
+  border-radius:22px;
+  overflow:hidden;
+  background: linear-gradient(180deg, #0f1326cc, #0f1326aa);
+  box-shadow:0 30px 90px rgba(0,0,0,.45);
+  backdrop-filter: blur(10px);
+  transform-origin: top center;
+  will-change: transform;
+  transform: translateY(14px);
+  opacity:0;
+  animation: cardIn .9s ease-out forwards;
 }
-@keyframes cardIn{ to{ opacity:1; } }
+@keyframes cardIn{ to{ transform: translateY(0); opacity:1; } }
 
-.top{ padding:22px 18px 8px; text-align:center; }
+.top{ padding:30px 22px 10px; text-align:center; }
 .badge{
-display:inline-flex; gap:10px; align-items:center;
-padding:8px 14px; border-radius:999px;
-background:#00000033; border:1px solid #ffffff2a;
-font-weight:800; letter-spacing:.08em; text-transform:uppercase; font-size:12px;
+  display:inline-flex; gap:10px; align-items:center;
+  padding:8px 14px; border-radius:999px;
+  background:#00000033; border:1px solid #ffffff2a;
+  font-weight:800; letter-spacing:.08em; text-transform:uppercase; font-size:12px;
 }
 .pulseDot{
-width:9px;height:9px;border-radius:999px; background:var(--gold);
-box-shadow:0 0 0 0 rgba(216,179,106,.65);
-animation:pulse 1.6s ease-out infinite;
+  width:9px;height:9px;border-radius:999px; background:var(--gold);
+  box-shadow:0 0 0 0 rgba(216,179,106,.65);
+  animation:pulse 1.6s ease-out infinite;
 }
 @keyframes pulse{ 0%{box-shadow:0 0 0 0 rgba(216,179,106,.65)} 100%{box-shadow:0 0 0 18px rgba(216,179,106,0)} }
 
 h1{
-margin:12px 0 6px;
-font-size: clamp(30px, 4.2vw, 50px);
-line-height:1.05;
-letter-spacing:-.02em;
-text-shadow:0 10px 50px rgba(0,0,0,.45);
+  margin:14px 0 6px;
+  font-size: clamp(34px, 4.6vw, 54px);
+  line-height:1.05;
+  letter-spacing:-.02em;
+  text-shadow:0 10px 50px rgba(0,0,0,.45);
 }
 .glow{
-background: linear-gradient(90deg, #fff, #ffe7b6, #fff);
--webkit-background-clip:text; background-clip:text;
-color: transparent;
-animation: shimmer 2.8s ease-in-out infinite;
+  background: linear-gradient(90deg, #fff, #ffe7b6, #fff);
+  -webkit-background-clip:text; background-clip:text;
+  color: transparent;
+  animation: shimmer 2.8s ease-in-out infinite;
 }
 @keyframes shimmer{
-0%{ filter: drop-shadow(0 0 0 rgba(216,179,106,0)); }
-50%{ filter: drop-shadow(0 0 18px rgba(216,179,106,.40)); }
-100%{ filter: drop-shadow(0 0 0 rgba(216,179,106,0)); }
+  0%{ filter: drop-shadow(0 0 0 rgba(216,179,106,0)); }
+  50%{ filter: drop-shadow(0 0 18px rgba(216,179,106,.40)); }
+  100%{ filter: drop-shadow(0 0 0 rgba(216,179,106,0)); }
 }
 
 .amp{
-margin: 4px auto 8px;
-font-size: clamp(54px, 7vw, 86px);
-font-weight: 950;
-line-height: 1;
-background: linear-gradient(90deg,#ffe7b6,#d8b36a,#ffe7b6);
--webkit-background-clip:text;
-background-clip:text;
-color: transparent;
-filter: drop-shadow(0 8px 26px rgba(216,179,106,.35));
+  margin: 6px auto 10px;
+  font-size: clamp(64px, 8vw, 96px);
+  font-weight: 950;
+  line-height: 1;
+  background: linear-gradient(90deg,#ffe7b6,#d8b36a,#ffe7b6);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color: transparent;
+  filter: drop-shadow(0 8px 26px rgba(216,179,106,.35));
 }
 
-.sub{ margin:0 auto; max-width:760px; color:var(--muted); font-size:15px; line-height:1.55; }
+.sub{ margin:0 auto; max-width:760px; color:var(--muted); font-size:16px; line-height:1.65; }
 
 .grid{
-display:grid;
-grid-template-columns: 1.05fr .95fr;
-gap: 14px;
-padding: 14px 18px 16px;
+  display:grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: 18px;
+  padding: 18px 22px 24px;
 }
 @media (max-width: 860px){ .grid{ grid-template-columns: 1fr; } }
 
+/* Reduce spacing on smaller screens */
+@media (max-width: 860px){
+  .top{ padding: 18px 16px 6px; }
+  .grid{ padding: 12px 14px 14px; gap: 12px; }
+  .row{ padding: 10px 10px; margin-bottom: 10px; }
+  .footer{ padding: 0 14px 14px; }
+}
+
 .photoPanel{
-border:1px solid #ffffff22;
-border-radius:18px;
-overflow:hidden;
-background:#00000022;
-position:relative;
+  border:1px solid #ffffff22;
+  border-radius:18px;
+  overflow:hidden;
+  background:#00000022;
+  position:relative;
 }
 .photoPanel::after{
-content:"";
-position:absolute; inset:0;
-background:
-radial-gradient(420px 220px at 40% 20%, rgba(216,179,106,.22), transparent 60%),
-linear-gradient(180deg, transparent, rgba(0,0,0,.35));
-pointer-events:none;
+  content:"";
+  position:absolute; inset:0;
+  background:
+    radial-gradient(420px 220px at 40% 20%, rgba(216,179,106,.22), transparent 60%),
+    linear-gradient(180deg, transparent, rgba(0,0,0,.35));
+  pointer-events:none;
 }
 .photoPanel img{ width:100%; display:block; border-radius:18px; }
 
 .trail{
-position:absolute;
-left: 8%;
-bottom: 10%;
-width: 84%;
-height: 28%;
-pointer-events:none;
-opacity:.95;
+  position:absolute;
+  left: 8%;
+  bottom: 10%;
+  width: 84%;
+  height: 28%;
+  pointer-events:none;
+  opacity:.95;
 }
 .trail path{
-stroke: rgba(216,179,106,.85);
-stroke-width: 3.2;
-fill:none;
-stroke-linecap: round;
-stroke-dasharray: 520;
-stroke-dashoffset: 520;
-animation: draw 3.2s ease forwards;
-filter: drop-shadow(0 6px 12px rgba(0,0,0,.35));
+  stroke: rgba(216,179,106,.85);
+  stroke-width: 3.2;
+  fill:none;
+  stroke-linecap: round;
+  stroke-dasharray: 520;
+  stroke-dashoffset: 520;
+  animation: draw 3.2s ease forwards;
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,.35));
 }
 @keyframes draw{ to { stroke-dashoffset: 0; } }
 
 .info{
-border:1px solid #ffffff22;
-border-radius:18px;
-padding: 14px 14px 12px;
-background: linear-gradient(180deg, #ffffff0c, #ffffff05);
+  border:1px solid #ffffff22;
+  border-radius:18px;
+  padding: 18px 18px 16px;
+  background: linear-gradient(180deg, #ffffff0c, #ffffff05);
 }
 .row{
-display:flex; gap:12px;
-padding: 10px 10px;
-border-radius:14px;
-background:#00000018;
-border: 1px solid #ffffff12;
-margin-bottom: 10px;
+  display:flex; gap:12px;
+  padding: 12px 10px;
+  border-radius:14px;
+  background:#00000018;
+  border: 1px solid #ffffff12;
+  margin-bottom: 12px;
 }
 .label{ min-width:78px; font-weight:950; color:#fff; letter-spacing:.02em; }
-.val{ color: var(--muted); line-height:1.45; }
+.val{ color: var(--muted); line-height:1.5; }
 .val .place{ color:#fff; font-weight:950; }
 
-/* RSVP centered */
-.ctaWrap{
-display:flex;
-flex-wrap:wrap;
-gap:12px;
-margin-top: 10px;
-align-items:center;
-justify-content:center;
-text-align:center;
-}
+.ctaWrap{ display:flex; flex-wrap:wrap; gap:12px; margin-top: 12px; align-items:center; }
 .cta{
-display:inline-flex; align-items:center; gap:10px;
-padding: 11px 16px;
-border-radius: 14px;
-text-decoration:none;
-font-weight:950;
-color:#0b1020;
-background: linear-gradient(90deg, #ffe7b6, #d8b36a, #ffe7b6);
-box-shadow: 0 16px 40px rgba(216,179,106,.25);
-transition: transform .15s ease, filter .15s ease;
+  display:inline-flex; align-items:center; gap:10px;
+  padding: 12px 16px;
+  border-radius: 14px;
+  text-decoration:none;
+  font-weight:950;
+  color:#0b1020;
+  background: linear-gradient(90deg, #ffe7b6, #d8b36a, #ffe7b6);
+  box-shadow: 0 16px 40px rgba(216,179,106,.25);
+  transition: transform .15s ease, filter .15s ease;
 }
 .cta:hover{ transform: translateY(-2px); filter: brightness(1.05); }
 
-/* Fancy dress code */
-.footer{
-padding: 0 18px 16px;
-text-align:center;
-color:#d7cebfff;
-font-size: 12px;
-opacity:.95;
-}
-.dressPill{
-display:inline-flex;
-align-items:center;
-gap:10px;
-padding: 9px 14px;
-border-radius: 999px;
-border: 1px solid #ffffff2a;
-background:
-radial-gradient(300px 120px at 30% 30%, rgba(216,179,106,.22), transparent 60%),
-linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.04));
-box-shadow: 0 18px 60px rgba(0,0,0,.35);
-backdrop-filter: blur(10px);
-}
-.dressSpark{
-width:10px;height:10px;border-radius:999px;
-background: var(--gold);
-box-shadow: 0 0 0 0 rgba(216,179,106,.55);
-animation: pulse 1.6s ease-out infinite;
-}
-.dressText{ font-weight: 900; letter-spacing:.03em; }
-.dressText .fab{
-background: linear-gradient(90deg, #fff, #ffe7b6, #d8b36a, #fff);
--webkit-background-clip:text;
-background-clip:text;
-color: transparent;
-animation: shimmer 2.8s ease-in-out infinite;
-text-shadow: 0 10px 30px rgba(0,0,0,.35);
-}
+.footer{ padding: 0 22px 22px; text-align:center; color:#d7cebfff; font-size: 12px; opacity:.95; }
 
 .confetti, .notes{ position:fixed; inset:-20px 0 0 0; pointer-events:none; overflow:hidden; z-index:1; }
 .confetti span{
-position:absolute; top:-10vh; width:10px;height:18px; border-radius:3px; opacity:.85;
-animation: fall linear infinite;
-filter: drop-shadow(0 6px 10px rgba(0,0,0,.25));
+  position:absolute; top:-10vh; width:10px;height:18px; border-radius:3px; opacity:.85;
+  animation: fall linear infinite;
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,.25));
 }
 @keyframes fall{ to{ transform: translate3d(var(--drift), 120vh, 0) rotate(520deg); } }
 
 .notes span{
-position:absolute;
-bottom:-12vh;
-font-size:22px;
-opacity:.0;
-animation: floatUp linear infinite;
-filter: drop-shadow(0 10px 18px rgba(0,0,0,.35));
+  position:absolute;
+  bottom:-12vh;
+  font-size:22px;
+  opacity:.0;
+  animation: floatUp linear infinite;
+  filter: drop-shadow(0 10px 18px rgba(0,0,0,.35));
 }
 @keyframes floatUp{
-0% { transform: translate3d(0,0,0); opacity:0; }
-10% { opacity:.7; }
-100% { transform: translate3d(var(--drift), -120vh, 0); opacity:0; }
+  0% { transform: translate3d(0,0,0); opacity:0; }
+  10% { opacity:.7; }
+  100% { transform: translate3d(var(--drift), -120vh, 0); opacity:0; }
 }
 
 #musicToggle{
-position: fixed;
-bottom: 14px;
-right: 14px;
-z-index: 999;
-padding: 12px 16px;
-border-radius: 999px;
-border: 1px solid #ffffff33;
-background: linear-gradient(90deg,#ffe7b6,#d8b36a);
-color: #0b1020;
-font-weight: 950;
-font-size: 13px;
-letter-spacing: .04em;
-cursor: pointer;
-box-shadow: 0 12px 30px rgba(216,179,106,.35);
+  position: fixed;
+  bottom: 18px;
+  right: 18px;
+  z-index: 999;
+  padding: 12px 16px;
+  border-radius: 999px;
+  border: 1px solid #ffffff33;
+  background: linear-gradient(90deg,#ffe7b6,#d8b36a);
+  color: #0b1020;
+  font-weight: 950;
+  font-size: 13px;
+  letter-spacing: .04em;
+  cursor: pointer;
+  box-shadow: 0 12px 30px rgba(216,179,106,.35);
 }
 #musicToggle.playing{ background:#ffffff; }
 
+#tapOverlay{
+  position:fixed;
+  inset:0;
+  background: radial-gradient(800px 500px at 50% 35%, rgba(216,179,106,.18), rgba(0,0,0,.55));
+  z-index: 998;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: 20px;
+}
+#tapOverlay .panel{
+  width:min(520px, 92vw);
+  background:#0f1326ee;
+  border:1px solid #ffffff2a;
+  border-radius:18px;
+  padding:18px 16px;
+  text-align:center;
+  box-shadow:0 22px 70px rgba(0,0,0,.55);
+}
+#tapOverlay h2{ margin:0 0 8px; font-size:20px; letter-spacing:.01em; }
+#tapOverlay p{ margin:0 0 12px; color:var(--muted); line-height:1.5; font-size:14px; }
+#tapOverlay .btn{
+  display:inline-block;
+  padding:12px 16px;
+  border-radius:14px;
+  background: linear-gradient(90deg,#ffe7b6,#d8b36a,#ffe7b6);
+  color:#0b1020;
+  font-weight:950;
+  text-decoration:none;
+  cursor:pointer;
+  border:none;
+}
+
 @media (prefers-reduced-motion: reduce){
-body, .confetti span, .notes span, .glow, .trail path, .dressText .fab { animation: none !important; }
+  body, .confetti span, .notes span, .glow, .trail path { animation: none !important; }
 }
 </style>
 </head>
@@ -278,180 +276,236 @@ body, .confetti span, .notes span, .glow, .trail path, .dressText .fab { animati
 <body>
 
 <div class="confetti" aria-hidden="true">
-<span style="left:6%; background:#ffd166; --drift:-40px; animation-duration:8.5s; animation-delay:-1s;"></span>
-<span style="left:14%; background:#06d6a0; --drift: 60px; animation-duration:9.8s; animation-delay:-3s;"></span>
-<span style="left:22%; background:#ef476f; --drift:-20px; animation-duration:7.9s; animation-delay:-2.2s;"></span>
-<span style="left:30%; background:#118ab2; --drift: 80px; animation-duration:10.6s; animation-delay:-4.5s;"></span>
-<span style="left:38%; background:#ffd166; --drift:-70px; animation-duration:9.1s; animation-delay:-6s;"></span>
-<span style="left:46%; background:#ef476f; --drift: 50px; animation-duration:8.2s; animation-delay:-1.6s;"></span>
-<span style="left:54%; background:#06d6a0; --drift:-55px; animation-duration:10.2s; animation-delay:-3.9s;"></span>
-<span style="left:62%; background:#118ab2; --drift: 30px; animation-duration:7.6s; animation-delay:-2.8s;"></span>
-<span style="left:70%; background:#ffd166; --drift:-25px; animation-duration:11.1s; animation-delay:-5.3s;"></span>
-<span style="left:78%; background:#ef476f; --drift: 70px; animation-duration:8.9s; animation-delay:-4.1s;"></span>
-<span style="left:86%; background:#06d6a0; --drift:-35px; animation-duration:9.7s; animation-delay:-6.4s;"></span>
-<span style="left:93%; background:#118ab2; --drift: 55px; animation-duration:10.8s; animation-delay:-2.7s;"></span>
+  <span style="left:6%; background:#ffd166; --drift:-40px; animation-duration:8.5s; animation-delay:-1s;"></span>
+  <span style="left:14%; background:#06d6a0; --drift: 60px; animation-duration:9.8s; animation-delay:-3s;"></span>
+  <span style="left:22%; background:#ef476f; --drift:-20px; animation-duration:7.9s; animation-delay:-2.2s;"></span>
+  <span style="left:30%; background:#118ab2; --drift: 80px; animation-duration:10.6s; animation-delay:-4.5s;"></span>
+  <span style="left:38%; background:#ffd166; --drift:-70px; animation-duration:9.1s; animation-delay:-6s;"></span>
+  <span style="left:46%; background:#ef476f; --drift: 50px; animation-duration:8.2s; animation-delay:-1.6s;"></span>
+  <span style="left:54%; background:#06d6a0; --drift:-55px; animation-duration:10.2s; animation-delay:-3.9s;"></span>
+  <span style="left:62%; background:#118ab2; --drift: 30px; animation-duration:7.6s; animation-delay:-2.8s;"></span>
+  <span style="left:70%; background:#ffd166; --drift:-25px; animation-duration:11.1s; animation-delay:-5.3s;"></span>
+  <span style="left:78%; background:#ef476f; --drift: 70px; animation-duration:8.9s; animation-delay:-4.1s;"></span>
+  <span style="left:86%; background:#06d6a0; --drift:-35px; animation-duration:9.7s; animation-delay:-6.4s;"></span>
+  <span style="left:93%; background:#118ab2; --drift: 55px; animation-duration:10.8s; animation-delay:-2.7s;"></span>
 </div>
 
 <div class="notes" id="notes" aria-hidden="true" style="display:none;">
-<span style="left:10%; --drift:20px; animation-duration:6.5s; animation-delay:-1s;">♪</span>
-<span style="left:22%; --drift:-30px; animation-duration:7.2s; animation-delay:-3s;">♫</span>
-<span style="left:38%; --drift:25px; animation-duration:6.8s; animation-delay:-2s;">♬</span>
-<span style="left:55%; --drift:-20px; animation-duration:7.6s; animation-delay:-4s;">♪</span>
-<span style="left:72%; --drift:30px; animation-duration:6.9s; animation-delay:-2.6s;">♫</span>
-<span style="left:88%; --drift:-25px; animation-duration:7.9s; animation-delay:-5s;">♬</span>
+  <span style="left:10%; --drift:20px; animation-duration:6.5s; animation-delay:-1s;">♪</span>
+  <span style="left:22%; --drift:-30px; animation-duration:7.2s; animation-delay:-3s;">♫</span>
+  <span style="left:38%; --drift:25px; animation-duration:6.8s; animation-delay:-2s;">♬</span>
+  <span style="left:55%; --drift:-20px; animation-duration:7.6s; animation-delay:-4s;">♪</span>
+  <span style="left:72%; --drift:30px; animation-duration:6.9s; animation-delay:-2.6s;">♫</span>
+  <span style="left:88%; --drift:-25px; animation-duration:7.9s; animation-delay:-5s;">♬</span>
 </div>
 
-<audio id="bgMusic" preload="auto" loop autoplay>
-<source src="happy-birthday-stevie-wonder.mp3" type="audio/mpeg">
+<!-- Start Invitation Popup -->
+<div id="tapOverlay">
+  <div class="panel">
+    <h2>Start Invitation 🎶</h2>
+    <p>Tap “Start Invitation” to begin the music and start the animation.</p>
+    <button class="btn" id="startBtn">Start Invitation</button>
+  </div>
+</div>
+
+<audio id="bgMusic" preload="auto" loop>
+  <source src="happy-birthday-stevie-wonder.mp3" type="audio/mpeg">
 </audio>
 
-<button id="musicToggle" aria-label="Toggle music">▶︎Play Music</button>
+<button id="musicToggle" aria-label="Toggle music">▶︎ Play Music</button>
 
 <div class="wrap">
-<main class="card" role="main" id="inviteCard">
-<header class="top">
-<div class="badge"><span class="pulseDot"></span> Let’s Celebrate Together!</div>
+  <main class="card" role="main">
+    <header class="top">
+      <div class="badge"><span class="pulseDot"></span> Let’s Celebrate Together!</div>
 
-<h1><span class="glow">I’m Turning 60</span> ✨</h1>
-<div class="amp">&amp;</div>
+      <h1><span class="glow">I’m Turning 60</span> ✨</h1>
+      <div class="amp">&amp;</div>
 
-<p class="sub">
-I’d love for you to join me in marking this special milestone.
-Let’s share an evening filled with great food, laughter, and wonderful memories.
-</p>
-</header>
+      <p class="sub">
+        I’d love for you to join me in marking this special milestone.
+        Let’s share an evening filled with great food, laughter, and wonderful memories.
+      </p>
+    </header>
 
-<section class="grid">
-<div class="photoPanel">
-<img src="60th_birthday_animation_clean_centered_01_to_22_1.gif" alt="Then to now bike animation">
-<svg class="trail" viewBox="0 0 1000 300" preserveAspectRatio="none" aria-hidden="true">
-<path d="M20,210 C160,80 250,260 380,170 C520,70 620,240 740,150 C860,75 920,135 980,95" />
-</svg>
-</div>
+    <section class="grid">
+      <div class="photoPanel">
+        <!-- IMPORTANT:
+             - This starts as a STILL image so nothing "starts early"
+             - On Start Invitation, JS swaps to the GIF and restarts it
+             - Make sure the .jpeg exists in the same folder on GitHub -->
+        <img id="heroMedia"
+             src="60th_birthday_animation_clean_centered_01_to_22_1.jpeg"
+             data-gif="60th_birthday_animation_clean_centered_01_to_22_1.gif"
+             alt="Then to now bike animation">
+        <svg class="trail" viewBox="0 0 1000 300" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M20,210 C160,80 250,260 380,170 C520,70 620,240 740,150 C860,75 920,135 980,95" />
+        </svg>
+      </div>
 
-<div class="info">
-<div class="row">
-<div class="label">When:</div>
-<div class="val">
-<strong style="color:#fff;">Sunday, December 28th</strong><br>
-<strong style="color:#fff;">7:45 PM</strong>
-</div>
-</div>
+      <div class="info">
+        <div class="row">
+          <div class="label">When:</div>
+          <div class="val">
+            <strong style="color:#fff;">Sunday, December 28th</strong><br>
+            <strong style="color:#fff;">7:45 PM</strong>
+          </div>
+        </div>
 
-<div class="row">
-<div class="label">Where:</div>
-<div class="val">
-<div class="place">Copley’s</div>
-621 North Palm Canyon Drive<br />
-Palm Springs, CA 92262<br />
-<a style="color:var(--gold); font-weight:950;" target="_blank" rel="noopener"
-href="https://www.google.com/maps/search/?api=1&query=Copley%E2%80%99s%20621%20North%20Palm%20Canyon%20Drive%20Palm%20Springs%20CA%2092262">
-View map →
-</a>
-</div>
-</div>
+        <div class="row">
+          <div class="label">Where:</div>
+          <div class="val">
+            <div class="place">Copley’s</div>
+            621 North Palm Canyon Drive<br />
+            Palm Springs, CA 92262<br />
+            <a style="color:var(--gold); font-weight:950;" target="_blank" rel="noopener"
+               href="https://www.google.com/maps/search/?api=1&query=Copley%E2%80%99s%20621%20North%20Palm%20Canyon%20Drive%20Palm%20Springs%20CA%2092262">
+              View map →
+            </a>
+          </div>
+        </div>
 
-<p class="sub" style="margin:12px 4px 0;">
-Your presence would mean the world to me—let’s make it a night to remember!
-</p>
+        <p class="sub" style="margin:14px 4px 0;">
+          Your presence would mean the world to me—let’s make it a night to remember!
+        </p>
 
-<div class="ctaWrap">
-<a class="cta"
-href="mailto:ervdocjr@gmail.com?subject=RSVP%20%E2%80%94%2060th%20Birthday%20Dinner&body=Hi!%0A%0AI%E2%80%99m%20excited%20to%20celebrate%20with%20you%20on%20Sunday%2C%20December%2028th%20at%207%3A00%20PM%20at%20Copley%E2%80%99s.%0A%0AName%3A%20%0A">
-✉️ RSVP
-</a>
-</div>
-</div>
-</section>
+        <div class="ctaWrap">
+          <a class="cta"
+             href="mailto:ervdocjr@gmail.com?subject=RSVP%20%E2%80%94%2060th%20Birthday%20Dinner&body=Hi!%0A%0AI%E2%80%99m%20excited%20to%20celebrate%20with%20you%20on%20Sunday%2C%20December%2028th%20at%207%3A45%20PM%20at%20Copley%E2%80%99s.%0A%0AName%3A%20%0A">
+            ✉️ RSVP
+          </a>
+        </div>
+      </div>
+    </section>
 
-<div class="footer">
-<div class="dressPill" aria-label="Dress code">
-<span class="dressSpark" aria-hidden="true"></span>
-<span class="dressText">Dress code: whatever makes you feel <span class="fab">FABULOUS!</span> ✨</span>
-</div>
-</div>
-</main>
+    <div class="footer">
+      Dress code: whatever makes you feel <strong>FABULOUS!</strong> ✨
+    </div>
+  </main>
 </div>
 
 <script>
+/* ---------- confetti random sizing ---------- */
 document.querySelectorAll('.confetti span').forEach((s) => {
-const w = 6 + Math.random()*10;
-const h = 10 + Math.random()*18;
-s.style.width = w + 'px';
-s.style.height = h + 'px';
-s.style.transform = `rotate(${Math.random()*180}deg)`;
-s.style.borderRadius = (2 + Math.random()*6) + 'px';
+  const w = 6 + Math.random()*10;
+  const h = 10 + Math.random()*18;
+  s.style.width = w + 'px';
+  s.style.height = h + 'px';
+  s.style.transform = `rotate(${Math.random()*180}deg)`;
+  s.style.borderRadius = (2 + Math.random()*6) + 'px';
 });
 
-const music = document.getElementById('bgMusic');
+/* ---------- elements ---------- */
+const music  = document.getElementById('bgMusic');
 const toggle = document.getElementById('musicToggle');
+const overlay = document.getElementById('tapOverlay');
+const startBtn = document.getElementById('startBtn');
 const notes = document.getElementById('notes');
+const card = document.querySelector('.card');
+const hero = document.getElementById('heroMedia');
 
 let autoPauseTimer = null;
 const AUTO_PAUSE_AFTER_SECONDS = 0;
 
+/* ---------- audio helpers ---------- */
 function fadeInAudio(target=0.35, ms=1400){
-music.volume = 0.01;
-const steps = 24;
-const stepMs = ms/steps;
-let i = 0;
-const iv = setInterval(() => {
-i++;
-music.volume = Math.min(target, 0.01 + (target-0.01)*(i/steps));
-if(i>=steps) clearInterval(iv);
-}, stepMs);
+  music.volume = 0.01;
+  const steps = 24;
+  const stepMs = ms/steps;
+  let i = 0;
+  const iv = setInterval(() => {
+    i++;
+    music.volume = Math.min(target, 0.01 + (target-0.01)*(i/steps));
+    if(i>=steps) clearInterval(iv);
+  }, stepMs);
 }
 
-async function playMusic(){
-try{
-await music.play();
-fadeInAudio(0.35, 1400);
-toggle.textContent = '⏸ Pause Music';
-toggle.classList.add('playing');
-notes.style.display = 'block';
+async function playMusicFromStart(){
+  music.pause();
+  music.currentTime = 0;
+  music.load();          // helps some browsers restart cleanly
+  await music.play();    // user gesture required (handled by Start Invitation)
+  fadeInAudio(0.35, 1400);
 
-if (AUTO_PAUSE_AFTER_SECONDS > 0){
-clearTimeout(autoPauseTimer);
-autoPauseTimer = setTimeout(() => pauseMusic(), AUTO_PAUSE_AFTER_SECONDS * 1000);
-}
-}catch(e){
-console.log("Music play blocked:", e);
-}
+  toggle.textContent = '⏸ Pause Music';
+  toggle.classList.add('playing');
+  notes.style.display = 'block';
+
+  if (AUTO_PAUSE_AFTER_SECONDS > 0){
+    clearTimeout(autoPauseTimer);
+    autoPauseTimer = setTimeout(() => pauseMusic(), AUTO_PAUSE_AFTER_SECONDS * 1000);
+  }
 }
 
 function pauseMusic(){
-music.pause();
-toggle.textContent = '▶︎ Play Music';
-toggle.classList.remove('playing');
-notes.style.display = 'none';
-clearTimeout(autoPauseTimer);
+  music.pause();
+  toggle.textContent = '▶︎ Play Music';
+  toggle.classList.remove('playing');
+  notes.style.display = 'none';
+  clearTimeout(autoPauseTimer);
 }
 
-/* Fit the entire invite (including Dress code) into ONE screen: scale by BOTH width + height */
-function fitInviteToScreen(){
-const card = document.getElementById('inviteCard');
-card.style.transform = 'scale(1)';
+/* ---------- start invitation: start GIF + music together ---------- */
+function startGifNow(){
+  if (!hero) return;
+  const gifSrc = hero.getAttribute('data-gif');
+  if (!gifSrc) return;
 
-requestAnimationFrame(() => {
-const rect = card.getBoundingClientRect();
-const margin = 20; // total safe margin inside viewport
-const availW = Math.max(320, window.innerWidth - margin);
-const availH = Math.max(320, window.innerHeight - margin);
-
-const scale = Math.min(1, availW / rect.width, availH / rect.height);
-card.style.transform = `scale(${scale})`;
-});
+  // Cache-bust so the GIF restarts exactly when user taps Start
+  hero.src = `${gifSrc}?t=${Date.now()}`;
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-fitInviteToScreen();
-playMusic();
-});
-window.addEventListener('resize', fitInviteToScreen);
+async function startInvitation(){
+  try{
+    startGifNow();               // start animation now
+    await playMusicFromStart();  // start music now (allowed by tap)
+    overlay.style.display = 'none';
+  }catch(e){
+    console.log("Start blocked:", e);
+    // keep overlay visible if playback fails
+  }
+}
 
-toggle.addEventListener('click', () => {
-if (music.paused) playMusic();
-else pauseMusic();
+/* ---------- music toggle ---------- */
+toggle.addEventListener('click', async () => {
+  try{
+    if (music.paused) await playMusicFromStart();
+    else pauseMusic();
+  }catch(e){
+    console.log("Toggle blocked:", e);
+  }
+});
+
+/* ---------- overlay start ---------- */
+startBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  startInvitation();
+});
+overlay.addEventListener('click', startInvitation);
+
+/* ---------- ONE-SCREEN AUTO-FIT SCALING ---------- */
+function fitToOneScreen(){
+  if (!card) return;
+
+  // Reset to measure natural height
+  card.style.transform = 'scale(1)';
+  const vh = window.innerHeight;
+  const rect = card.getBoundingClientRect();
+
+  // Leave a little breathing room for mobile browser UI
+  const padding = Math.max(16, Math.round(vh * 0.04));
+  const available = vh - padding;
+
+  const scale = Math.min(1, available / rect.height);
+  card.style.transform = `scale(${scale})`;
+}
+
+window.addEventListener('load', () => {
+  // overlay stays until user starts invitation
+  setTimeout(fitToOneScreen, 50);
+});
+window.addEventListener('resize', () => {
+  setTimeout(fitToOneScreen, 80);
 });
 </script>
 
